@@ -19,11 +19,12 @@ pipeline{
   }
   stages{
        //下载代码
+       hello()
        stage("GetCode"){  //阶段名称
           steps{  //步骤
               timeout(time:5,unit:"MINUTES"){ //步骤超时时间
                 script{  //填写运行代码
-                    print('获取代码')
+                    print('GetCode')
                 }
             }
         }
@@ -33,7 +34,7 @@ pipeline{
            steps{
               timeout(time:20,unit:"MINUTES"){
                 script{
-                     print('应用打包')
+                     print('Build')
                 }  
               }
           }
@@ -43,8 +44,8 @@ pipeline{
            steps{
               timeout(time:30,unit:"MINUTES"){
                 script{
-                     print('代码扫描')
-                  tools.PrintMes("this is my library!")
+                     print('CodeScan')
+                     tools.PrintMes("this is my library!")
                 }  
               }
           }
@@ -59,17 +60,17 @@ pipeline{
        }
        success {
             script{
-                currentBuild.description += "\n 构建成功"
+                currentBuild.description = "\n 构建成功"
             }
        }
        failure {
             script{
-                currentBuild.description += "\n 构建失败"
+                currentBuild.description = "\n 构建失败"
             }
        }
        aborted {
             script{
-                currentBuild.description += "\n 构建取消"
+                currentBuild.description = "\n 构建取消"
             }
        }
   }
