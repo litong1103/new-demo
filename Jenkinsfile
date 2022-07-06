@@ -4,12 +4,13 @@ def tool = new org.devops.tools()
 String workspace= "D:/Program Files/Jenkins workspace"
 
 pipeline{
-    agent {    
+   agent {    
         node{
             label "demo"  //指定运行节点的的标签
             customWorkspace "${workspace}"  //指定运行工作目录可自定义
         }
-    }
+   }
+  hello()
   options{
       timestamps()  //日志会有时间
       skipDefaultCheckout()  //删除隐式checkout scm语句
@@ -19,7 +20,6 @@ pipeline{
   }
   stages{
        //下载代码
-       hello()
        stage("GetCode"){  //阶段名称
           steps{  //步骤
               timeout(time:5,unit:"MINUTES"){ //步骤超时时间
