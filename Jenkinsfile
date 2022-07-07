@@ -1,8 +1,8 @@
-@Library('jenkins library') _
-def tool = new org.devops.tools()
+@Library('jenkins library@main') _
+def tools = new org.devops.tools()
 
 String workspace= "D:/Program Files/Jenkins workspace"
-
+hello()
 pipeline{
    agent {    
         node{
@@ -10,7 +10,7 @@ pipeline{
             customWorkspace "${workspace}"  //指定运行工作目录可自定义
         }
    }
-  hello()
+  
   options{
       timestamps()  //日志会有时间
       skipDefaultCheckout()  //删除隐式checkout scm语句
